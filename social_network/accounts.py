@@ -4,6 +4,7 @@ class User(object):
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
+        
         self.following = []
         self.posts = []
 
@@ -12,11 +13,11 @@ class User(object):
         self.posts.append(post)
 
     def get_timeline(self):
-        timeline = []
+        posts = []
         for user in self.following:
-            timeline.append(user.posts)
-        timeline.append(self.posts)
-        return sorted(timeline, key=lambda p: p.timestamp, reverse=False)
+            posts += user.posts
+
+        return sorted(posts, key=lambda p: p.timestamp, reverse=False)
 
     def follow(self, other):
         self.following.append(other)
